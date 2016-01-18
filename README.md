@@ -1,2 +1,2 @@
-# ruby-terminal-poker-game
-Ruby poker terminal game made at app academy (in progress).
+# terminal-poker-game
+Poker terminal game made using ruby at app academy (in progress).
