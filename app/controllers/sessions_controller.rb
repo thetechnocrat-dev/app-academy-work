@@ -5,11 +5,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_credentials(login_params(:email),
-                                      login_params(:password))
+    @user = User.find_by_credentials(login_params[:email],
+                                      login_params[:password])
 
     if @user
-      redirect_to users_url(@user.id)
+      render(
+        json: "Login success"
+      )
     else
       render(
         json: "Login failed"
@@ -20,6 +22,7 @@ class SessionsController < ApplicationController
   private
 
   def login_params
-    params.require(:user).permit(:email, :password)
+    params.require(:login).permit(:email, :password)
   end
+
 end
