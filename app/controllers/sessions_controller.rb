@@ -9,13 +9,12 @@ class SessionsController < ApplicationController
                                       login_params[:password])
 
     if @user
-      render(
-        json: "Login success"
-      )
+      log_in_user!(@user)
+      flash[:notes] = ["Login Success"]
+      redirect_to users_url
     else
-      render(
-        json: "Login failed"
-      )
+      flash[:notes] = ["Login Failure"]
+      render :new
     end
   end
 

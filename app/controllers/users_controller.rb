@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
 
+  def index
+    render :index
+  end
+
+  def show
+    render :show
+  end
+
   def new
     render :new
   end
@@ -8,13 +16,12 @@ class UsersController < ApplicationController
     @user = User.new(email: user_params[:email],
                     password: user_params[:password])
     if @user.save()
-      render(
-        json: "Sign Up Success =)"
-      )
+      log_in_user!(@user)
+      flash[:notes] = ["Signup Success"]
+      redirect_to users_url
     else
-      render(
-        json: "Sign Up failed"
-      )
+      flash[:notes] = ["Signup Failure"]
+      render :new
     end
   end
 

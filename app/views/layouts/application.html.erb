@@ -8,6 +8,16 @@
 </head>
 <body>
 
+<% if flash.now[:notes] %>
+  <% flash.now[:notes].each do |note| %>
+   <%= note %><br/>
+  <% end %>
+<% end %>
+
+current_user: <%= current_user.email %>
+
+<br/>
+
 <%= yield %>
 
 </body>
