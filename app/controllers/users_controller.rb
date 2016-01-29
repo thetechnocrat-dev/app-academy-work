@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class UsersController < ApplicationController
 
   def index
@@ -18,7 +30,7 @@ class UsersController < ApplicationController
     if @user.save()
       log_in_user!(@user)
       flash[:notes] = ["Signup Success"]
-      redirect_to users_url
+      redirect_to user_url(@user)
     else
       flash[:notes] = ["Signup Failure"]
       render :new

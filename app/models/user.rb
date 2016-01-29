@@ -11,7 +11,7 @@
 #
 
 class User < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
+  # include ActiveModel::ForbiddenAttributesProtection
 
   after_initialize do
     self.session_token = User.generate_session_token
@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   validates :email, :password_digest, :session_token, presence: true
   validates :email, :session_token, uniqueness: true
+  validates :password, length: { minimum: 6 }, allow_nil: true
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
@@ -34,14 +35,12 @@ class User < ActiveRecord::Base
 
   def resest_session_token!
     self.session_token = SecureRandom.urlsafe_base64
-  end
-
-  def ensure_session_token
-
+    self.save!
   end
 
   def password=(password)
-    self.password_digest = BCrypt::Password.create(password)
+    @password = password
+    self.password_digest = BCrypt::Password.create(password).to_s
   end
 
   def is_password?(password)
