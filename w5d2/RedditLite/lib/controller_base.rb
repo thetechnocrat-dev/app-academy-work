@@ -6,7 +6,7 @@ require 'active_support/inflector'
 
 class ControllerBase
   attr_reader :req, :res, :params
-  attr_accessor :already_built_response
+  attr_accessor :already_built_response, :session
   # Setup the controller
   def initialize(req, res)
     @req = req
@@ -25,6 +25,7 @@ class ControllerBase
       self.already_built_response = true
       self.res.header["location"] = url
       self.res.status = 302
+      session.store_session(res)
     else
       raise "already rendered"
     end
@@ -38,6 +39,7 @@ class ControllerBase
       self.res.header['Content-Type'] = content_type
       self.already_built_response = true
       self.res.write(content)
+      session.store_session(res)
     else
       raise "already rendered"
     end
@@ -52,10 +54,12 @@ class ControllerBase
     content = ERB.new(html_erb_content).result(binding)
     content_type = 'text/html'
     render_content(content, content_type)
+    session.store_session(res)
   end
 
   # method exposing a `Session` object
   def session
+    @session ||= Session.new(req)
   end
 
   # use this with the router to call action_name (:index, :show, :create...)
