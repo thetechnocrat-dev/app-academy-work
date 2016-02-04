@@ -1,3 +1,5 @@
+// open -a "Google Chrome" test.html NB
+
 // Array.prototype = {
 //   myUniq: function() {
 //     var seenValues = [];
@@ -60,6 +62,7 @@ Array.prototype.myMap = function(funct) {
   return newAry;
 };
 
+// ask about setting defaults
 Array.prototype.myInject = function(funct, acc) {
   this.myEach(function(element) {
     acc += funct(element);
@@ -93,4 +96,49 @@ String.prototype.substrings = function() {
   }
 
   return subStrings;
+};
+
+var exp = function(base, exponent) {
+  if (exponent === 0) {
+    return 1;
+  }
+
+  return exp(base, exponent - 1) * base;
+};
+
+var fib = function(n) {
+  if (n === 0) {
+    return [];
+  } else if (n === 1) {
+    return [1];
+  } else if (n === 2) {
+    return [1, 1];
+  }
+  var prevFibs = fib(n - 1);
+  var currentFib = prevFibs[prevFibs.length - 1] +
+                   prevFibs[prevFibs.length - 2];
+
+  prevFibs.push(currentFib);
+  return prevFibs;
+};
+
+// ask about tab conventions
+var binarySearch = function(array, target) {
+  if (array.length === 0) {
+    return null;
+  } else if (array.length === 1 && array[0] !== target) {
+    return null;
+  }
+
+  var mid = Math.floor(array.length / 2);
+
+  if (array[mid] < target) {
+    var right = array.slice(mid, array.length);
+    return binarySearch(right, target) + mid;
+  } else if (array[mid] > target) {
+    var left = array.slice(0, mid);
+    return binarySearch(left, target);
+  } else {
+    return mid;
+  }
 };
