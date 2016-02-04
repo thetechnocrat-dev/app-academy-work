@@ -61,10 +61,36 @@ Array.prototype.myMap = function(funct) {
 };
 
 Array.prototype.myInject = function(funct, acc) {
-
   this.myEach(function(element) {
     acc += funct(element);
   });
 
   return acc;
+};
+
+Array.prototype.bubbleSort = function() {
+  do {
+    var swapped = false;
+    for (var i = 0; i < this.length - 1; i++){
+      if (this[i] > this[i+1]) {
+        var temp = this[i];
+        this[i] = this[i+1];
+        this[i+1] = temp;
+        swapped = true;
+      }
+    }
+  } while (swapped);
+
+  return this;
+};
+
+String.prototype.substrings = function() {
+  var subStrings = [];
+  for (var i = 0; i < this.length; i++) {
+    for (var j = i + 1; j < this.length + 1; j++) {
+      subStrings.push(this.substring(i,j));
+    }
+  }
+
+  return subStrings;
 };
