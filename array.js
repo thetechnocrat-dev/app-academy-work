@@ -44,3 +44,27 @@ Array.prototype.myTranspose = function() {
   }
   return transpose;
 };
+
+Array.prototype.myEach = function(funct) {
+  for(var i = 0; i < this.length; i++) {
+    funct(this[i]);
+  }
+  return this;
+};
+
+Array.prototype.myMap = function(funct) {
+  var newAry = [];
+  this.myEach(function(element) {
+    newAry.push(funct(element));
+  });
+  return newAry;
+};
+
+Array.prototype.myInject = function(funct, acc) {
+
+  this.myEach(function(element) {
+    acc += funct(element);
+  });
+
+  return acc;
+};
