@@ -179,6 +179,52 @@ function Cat(name, owner) {
 Cat.prototype = {
   cuteStatement: function() {
     console.log(this.owner + ' loves ' + this.name);
-
   }
 };
+
+function Student(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.courses = [];
+}
+
+Student.prototype = {
+  name: function() { return this.firstName + ' ' + this.lastName; },
+
+  enroll: function(course) {
+    this.courses.push(course);
+    course.students.push(this);
+  },
+
+  course_load: function() {
+    var deptHash = {};
+
+    var makeDepartmentHash = function(course) {
+        if (deptHash[course.department] === undefined) {
+          deptHash[course.department] = 0;
+        }
+
+        deptHash[course.department] += course.numOfCredits;
+    };
+
+    this.courses.forEach(makeDepartmentHash);
+    return deptHash;
+  }
+};
+
+function Course(name, department, numOfCredits) {
+  this.name = name;
+  this.department = department;
+  this.numOfCredits = numOfCredits;
+  this.students = [];
+}
+
+Course.prototype = {
+  add_student: function(student) {
+    student.enroll(this);
+  }
+};
+
+var americanHist = new Course("American History", "History", 4);
+var europeanHist = new Course("European History", "History", 3);
+var ned = new Student("Ned", "LastName");
