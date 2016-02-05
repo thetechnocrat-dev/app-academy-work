@@ -1,0 +1,30 @@
+<% url = locals[:url] %>
+<% method = locals[:method] %>
+
+<form action="<%= url %>" method="POST">
+  <input type="hidden" name="<%= url %>" method="<%= method %>">
+
+  <label for="track[name]">Name of Song</label>
+  <input type="text" name="track[name]">
+
+  <br/>
+
+  <label for="track[album]">Album</label>
+  <input type="text" name="track[album]">
+
+  <br/>
+
+  <label for="track_bonus">Bonus Track</label>
+  <input type="radio" name="track[bonus]" value="true" id="track_bonus">
+
+  <br/>
+
+  <label for="track_reg">Reguluar Track</label>
+  <input type="radio" name="track[bonus]" value="false" id="track_reg">
+
+  <br/>
+
+  <label for="track[lyrics]">Lyrics</label>
+  <textarea type="textarea" name="track[lyrics]"></textarea>
+
+</form>
