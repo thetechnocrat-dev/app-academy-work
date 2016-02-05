@@ -1,15 +1,15 @@
 Function.prototype.myBind = function () {
   var that = arguments[0];
-  var args = [];
+  var boundArgs = [];
   for (var i = 1; i < arguments.length; i++) {
-    args.push(arguments[i]);
+    boundArgs.push(arguments[i]);
   }
   var func = this;
   return function() {
     if (arguments.length > 0) {
       func.apply(that, arguments);
     } else {
-      func.apply(that, args);
+      func.apply(that, boundArgs);
     }
   };
 };
