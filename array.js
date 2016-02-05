@@ -65,7 +65,7 @@ Array.prototype.myMap = function(funct) {
 // ask about setting defaults
 Array.prototype.myInject = function(funct, acc) {
   this.myEach(function(element) {
-    acc += funct(element);
+    acc = funct(acc, element);
   });
 
   return acc;
@@ -122,8 +122,9 @@ var fib = function(n) {
   return prevFibs;
 };
 
-// ask about tab conventions
-var binarySearch = function(array, target) {
+// ask about tab conventions ask if there is a differnece between
+//this and var = function
+function binarySearch(array, target) {
   if (array.length === 0) {
     return null;
   } else if (array.length === 1 && array[0] !== target) {
@@ -136,9 +137,48 @@ var binarySearch = function(array, target) {
     var right = array.slice(mid, array.length);
     return binarySearch(right, target) + mid;
   } else if (array[mid] > target) {
-    var left = array.slice(0, mid);
-    return binarySearch(left, target);
+      var left = array.slice(0, mid);
+      return binarySearch(left, target);
   } else {
-    return mid;
+      return mid;
+  }
+}
+
+function mergeSort(array) {
+  if (array.length === 0 || array.length === 1) {
+    return array;
+  }
+
+  var pivot = Math.floor(array.length / 2);
+  var left = array.slice(0, pivot);
+  var right = array.slice(pivot, array.length);
+
+  return merge(mergeSort(left), mergeSort(right));
+
+}
+
+function merge(left, right) {
+  var mergedArray = [];
+
+  while (left.length > 0 && right.length > 0) {
+    if (left[0] > right[0]) {
+      mergedArray.push(right.shift());
+    } else {
+      mergedArray.push(left.shift());
+    }
+  }
+
+  return mergedArray.concat(left).concat(right);
+}
+
+function Cat(name, owner) {
+  this.name = name;
+  this.owner =  owner;
+}
+
+Cat.prototype = {
+  cuteStatement: function() {
+    console.log(this.owner + ' loves ' + this.name);
+
   }
 };
