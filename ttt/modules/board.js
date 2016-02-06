@@ -32,6 +32,9 @@ Board.prototype.setMarkAt = function (mark, row, col) {
 };
 
 Board.prototype.isValidMove = function (row, col) {
+  if (!(_.contains([0,1,2], row) && _.contains([0,1,2], col))) {
+    return false;
+  }
   return this.grid[row][col] === ' ';
 };
 
@@ -100,34 +103,3 @@ Board.prototype.isFull = function () {
 };
 
 module.exports = Board;
-
-// testing
-//
-// var winningBoard = new Board();
-// winningBoard.grid = [['x',' ',' '],
-//                      ['o','x','o'],
-//                      [' ','o','x']];
-// // console.log(winningBoard.isWon());
-//
-// var nonWinningBoard = new Board();
-// nonWinningBoard.grid = [['x',' ','x'],
-//                         ['o',' ','o'],
-//                         [' ','o',' ']];
-// // console.log(nonWinningBoard.isWon());
-//
-// console.log(winningBoard.isFull());
-//
-// var fullBoard = new Board();
-// fullBoard.grid =       [['x','o','x'],
-//                         ['o','x','o'],
-//                         ['o','o','x']];
-// console.log(fullBoard.isFull());
-
-// console.log(new Board().isWinningLine(['x', 'x', 'x']));
-// console.log(new Board().isWinningLine(['o', 'o', 'o']));
-// console.log(new Board().isWinningLine(['o', ' ', 'o']));
-// console.log(new Board().isWinningLine([' ', ' ', ' ']));
-// console.log(new Board().isWinningLine(['x', 'o', ' ']));
-
-
-//

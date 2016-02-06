@@ -23,9 +23,4 @@ Player.prototype.prompt = function (callback) {
   });
 };
 
-
-
 module.exports = Player;
-
-//
-// new Player("bob", "x", reader).prompt(function(m,c,r) {console.log(m,c,r);});
