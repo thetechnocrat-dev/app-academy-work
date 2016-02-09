@@ -23,39 +23,52 @@ Function.prototype.myBind = function(context) {
   };
 };
 
-function Cat(name) {
-  this.name = name;
-}
+var curriedSum = function(numArgs) {
+  var numbers = [];
+  var _curriedSum = function (num) {
 
-Cat.prototype.says = function (sound, person) {
-  console.log(this.name + " says " + sound + " to " + person + "!");
-  return true;
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      var output = _und.reduce(numbers, function(memo, eachNum) {
+        return memo + eachNum;
+      });
+      return output;
+    } else {
+      return _curriedSum;
+    }
+  };
+
+  return _curriedSum;
 };
 
-var markov = new Cat("Markov");
-var breakfast = new Cat("Breakfast");
+Function.prototype.curry = function(numArgs) {
+  var func = this;
 
-markov.says("meow", "Ned");
-// Markov says meow to Ned!
-// true
+  var numbers = [];
+  var _curried = function (num) {
 
-markov.says.myBind(breakfast, "meow", "Kush")();
-// Breakfast says meow to Kush!
-// true
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      var output = func.apply(null, numbers);
+      return output;
+    } else {
+      return _curried;
+    }
+  };
 
-markov.says.myBind(breakfast)("meow", "a tree");
-// Breakfast says meow to a tree!
-// true
+  return _curried;
+};
 
+function summy(numArr) {
+  var output = numArr.reduce( function(memo, num) {
+    return memo + num;
+  });
+  return output;
+}
 
-var boundMarkov = markov.says.myBind(breakfast); // decloared it
-boundMarkov("meow", "a tree"); // called it
-
-markov.says.myBind(breakfast, "meow")("Markov");
-// Breakfast says meow to Markov!
-// true
-
-var notMarkovSays = markov.says.myBind(breakfast);
-notMarkovSays("meow", "me");
-// Breakfast says meow to me!
-// true
+console.log(summy.apply(this, [[1,2,3,4]]));
+console.log(summy([1,2,3,4]));
+//
+// var sum2 = summy.curry(4);
+//
+// console.log(sum2(5)(30)(20)(1));
