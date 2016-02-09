@@ -1,14 +1,10 @@
 /* PHASE 1: Header */
 
-* {
-  Box-sizing: border-box;
-}
-
 .body {
   font-family: Roboto;
   font-size: 16px;
   font-weight: 400;
-
+  background-color: #eee;
 }
 
 .header {
@@ -27,7 +23,7 @@
 
 }
 
-.header a:hover {
+.header li:hover {
   background-color: #000;
 }
 
@@ -37,6 +33,7 @@
   border-style: solid;
   border-color: #ccc;
 }
+
 .header-list li {
   float: left;
 }
@@ -50,8 +47,6 @@
 
 .header-nav {
   width: 900px;
-  border-left:  1px;
-  border-right: 1px;
   border-style: solid;
   border-color: #ccc;
   margin: 0 auto;

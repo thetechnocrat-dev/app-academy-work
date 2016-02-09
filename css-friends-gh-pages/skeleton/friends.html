@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>App Academy Friends</title>
 
-<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,400italic' rel='stylesheet' type='text/css'>  <link rel="stylesheet" href="css/00-reset.css" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700,400italic' rel='stylesheet' type='text/css'>  <link rel="stylesheet" href="css/00-reset.css" type="text/css">
   <link rel="stylesheet" href="css/01-header.css" type="text/css">
   <link rel="stylesheet" href="css/02-notifications.css" type="text/css">
   <link rel="stylesheet" href="css/03-layout.css" type="text/css">
@@ -25,7 +25,14 @@
     <nav class="header-nav">
       <h1 class="header-logo"><a href="#">Cat Academy Friends</a></h1>
       <ul class="header-list">
-        <li><a href="#">Notifications</a></li>
+        <li>
+          <a href="#">Notifications <badge class="badge">3</badge></a>
+          <ul class="notifications">
+            <li><a href="#">Breakfast wants breakfast!</a></li>
+            <li><a href="#">Dog says woof!</a></li>
+            <li><a href="#" class="why">Markov meows hello</a></li>
+          </ul>
+        </li>
         <li><a href="#">Profile</a></li>
         <li><a href="#">Settings</a></li>
         <li><a href="#">Sign In</a></li>
