@@ -28,3 +28,7 @@
   border: 1px solid #aaa;
   font-weight: 700;
 }
+
+.content-header-add-friend:hover {
+  background-color: #eee;
+}
