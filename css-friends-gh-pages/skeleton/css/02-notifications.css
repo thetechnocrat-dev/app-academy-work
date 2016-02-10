@@ -51,6 +51,7 @@
 .notifications a {
   padding-left: 20px;
   background-color: #eee;
-  font-weight: 300;
+  font-weight: 400;
   color: #000;
+  font-size: 14px;
 }
