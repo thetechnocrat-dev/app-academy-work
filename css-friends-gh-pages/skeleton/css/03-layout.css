@@ -1,6 +1,6 @@
 /* PHASE 3: Layout */
 .content {
-  min-height: 200px;
+  min-height: 240px;
   width: 900px;
   margin: auto;
   position: relative;
@@ -20,19 +20,19 @@
 }*/
 
 .content-sidebar {
-  min-height: 200px;
+  min-height: 240px;
   background-color: #fff;
   float: left;
-  width: 30%;
+  width: 240px;
   position: relative;
   display: block;
 }
 
 .content-main {
-  min-height: 200px;
+  min-height: 240px;
   background-color: #fff;
   float: right;
-  width: 629px;
+  width: 659px;
   position: relative;
   display: block;
 }
