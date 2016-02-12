@@ -20,5 +20,34 @@
     }
   };
 
+  DOMNodeCollection.prototype.html = function (str) {
+    if (typeof str === "undefined") {
+      return this.htmlements[0].innerHTML;
+    } else {
+      for(var i = 0; i < this.htmlements.length; i++) {
+        this.htmlements[i].innerHTML = str;
+      }
+    }
+  };
+
+  DOMNodeCollection.prototype.empty = function () {
+    for(var i = 0; i < this.htmlements.length; i++) {
+      this.htmlements[i].innerHTML = "";
+    }
+  };
+
+  DOMNodeCollection.prototype.append = function (items) {
+    if (items instanceof DOMNodeCollection) {
+      for(var i = 0; i < this.htmlements.length; i++) {
+        for (var j = 0; j < items.htmlements.length; j++) {
+          this.htmlements[i].appendChild(items.htmlements[j]);
+        }
+      }
+    } else if (items instanceof HTMLElement) {
+
+    } else {
+
+    }
+  };
 
 })();
