@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Password_Hash</th>
+    <th>Session_Token</th>
+  </tr>
+  <% User.all.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.password_digest %></td>
+      <td><%= user.session_token %></td>
+    </tr>
+  <% end %>
+  </table>
