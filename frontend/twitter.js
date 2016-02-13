@@ -1,8 +1,8 @@
 var FollowToggle = require('./follow_toggle.js');
 
 $(function() {
-  var followToggleButtons = $("button.follow_toggle");
+  var followToggleButtons = $("button.follow-toggle");
   followToggleButtons.each(function() {
-    var followToggleButton = new FollowToggle(this);
+    new FollowToggle(this);
   });
 });
