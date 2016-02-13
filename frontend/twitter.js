@@ -7,5 +7,9 @@ $(function() {
     new FollowToggle(this);
   });
 
-  new UsersSearch($("nav.users-search"));
+  var usersSearches =$("nav.users-search");
+  usersSearches.each(function() {
+    new UsersSearch(this);
+  });
+  
 });
