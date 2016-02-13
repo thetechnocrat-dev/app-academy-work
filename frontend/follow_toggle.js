@@ -8,11 +8,15 @@ var FollowToggle = function(el) {
 };
 
 FollowToggle.prototype.render = function () {
+  this.$el.prop("disabled", false);
   var text;
+
   if( this.followState === "followed") {
     text = "unfollow";
-  } else {
+  } else if ( this.followState === "unfollowed") {
     text = "follow";
+  } else {
+    text = this.followState;
   }
   this.$el.html(text);
 };
@@ -30,8 +34,9 @@ function followClick(context) {
     requestType = "POST";
   }
 
-  $.ajax({
+  context.$el.prop("disabled", true);
 
+  $.ajax({
     url: "/users/" + context.userId + "/follow",
     type: requestType,
     dataType: "json",
