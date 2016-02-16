@@ -47,6 +47,7 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 	var Tabs = __webpack_require__(159);
+	var Clock = __webpack_require__(160);
 	
 	// hard-coded, one day, pull this from ajaj!
 	var pages = [{
@@ -67,7 +68,8 @@
 	    return React.createElement(
 	      'div',
 	      {
-	        className: "tabs" },
+	        className: "widgets" },
+	      React.createElement(Clock, null),
 	      React.createElement(Tabs, { pages: pages })
 	    );
 	  }
@@ -19702,7 +19704,7 @@
 	        {
 	          key: index,
 	          className: klass,
-	          onClick: that.props.onTabChosen.bind(null, index) },
+	          onMouseOver: that.props.onTabChosen.bind(null, index) },
 	        title,
 	        ' '
 	      );
@@ -19731,7 +19733,7 @@
 	
 	    return React.createElement(
 	      "div",
-	      null,
+	      { className: "widget" },
 	      React.createElement(Headers, {
 	        selectedPage: this.state.selectedPage,
 	        onTabChosen: this.selectTab,
@@ -19746,6 +19748,114 @@
 	});
 	
 	module.exports = Tabs;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Time = React.createClass({
+	  displayName: 'Time',
+	
+	  getInitialState: function () {
+	    return { time: new Date() };
+	  },
+	  tick: function () {
+	    this.setState({ time: new Date() });
+	  },
+	  componentDidMount: function () {
+	    setInterval(this['tick'], 1000);
+	  },
+	  render: function () {
+	    var time = this.state.time;
+	    var h = time.getHours();
+	    var m = time.getMinutes();
+	    if (m < 10) {
+	      m = "0" + m;
+	    }
+	    var s = time.getSeconds();
+	    if (s < 10) {
+	      s = "0" + s;
+	    }
+	
+	    return React.createElement(
+	      'p',
+	      null,
+	      h + ' : ' + m + ' : ' + s
+	    );
+	  }
+	});
+	
+	var Weather = React.createClass({
+	  displayName: 'Weather',
+	
+	  getInitialState: function () {
+	    return { weather: { name: "Downloading...", main: { temp: "" } } };
+	  },
+	  componentDidMount: function () {
+	    this.getLocation();
+	  },
+	  getLocation: function () {
+	    var self = this;
+	    navigator.geolocation.getCurrentPosition(function (position) {
+	      var coord = [position.coords.latitude, position.coords.longitude];
+	      self.getWeather(coord);
+	    });
+	  },
+	  getWeather: function (coord) {
+	    var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + coord[0] + "&lon=" + coord[1] + "&appid=bcb83c4b54aee8418983c2aff3073b3b";
+	
+	    var xmlhttp = new XMLHttpRequest();
+	
+	    var self = this;
+	    xmlhttp.onreadystatechange = function () {
+	      if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+	        if (xmlhttp.status === 200) {
+	          self.setState({ weather: xmlhttp.response });
+	          console.log(xmlhttp.response);
+	        }
+	      }
+	    };
+	    xmlhttp.responseType = "json";
+	
+	    xmlhttp.open('GET', url, true);
+	    xmlhttp.send();
+	  },
+	
+	  render: function () {
+	    var temp = this.state.weather.main.temp * (9 / 5) - 459.67;
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h3',
+	        null,
+	        this.state.weather.name
+	      ),
+	      React.createElement(
+	        'span',
+	        null,
+	        "temperature: " + this.state.weather.main.temp
+	      )
+	    );
+	  }
+	});
+	
+	var Clock = React.createClass({
+	  displayName: 'Clock',
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: "widget" },
+	      React.createElement(Time, null),
+	      React.createElement(Weather, null)
+	    );
+	  }
+	});
+	
+	module.exports = Clock;
 
 /***/ }
 /******/ ]);

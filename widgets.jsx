@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Tabs = require('./tabs.jsx');
+var Clock = require('./clock.jsx');
 
 // hard-coded, one day, pull this from ajaj!
 var pages = [
@@ -22,7 +23,8 @@ var Widgets = React.createClass({
   render: function () {
     return(
       <div
-        className={"tabs"}>
+        className={"widgets"}>
+        <Clock/>
         <Tabs pages={pages} />
       </div>
     );

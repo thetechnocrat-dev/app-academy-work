@@ -15,7 +15,7 @@ var Headers = React.createClass({
         <span
           key={ index }
           className={ klass }
-          onClick={ that.props.onTabChosen.bind( null, index )}>
+          onMouseOver={ that.props.onTabChosen.bind( null, index )}>
           {title}{' '}
         </span>
       );
@@ -41,7 +41,7 @@ var Tabs = React.createClass({
     var page = this.props.pages[this.state.selectedPage];
 
     return(
-      <div>
+      <div className = {"widget"} >
         <Headers
           selectedPage={this.state.selectedPage}
           onTabChosen={this.selectTab}
