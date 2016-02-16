@@ -48,6 +48,7 @@
 	var ReactDOM = __webpack_require__(158);
 	var Tabs = __webpack_require__(159);
 	var Clock = __webpack_require__(160);
+	var Autocomplete = __webpack_require__(161);
 	
 	// hard-coded, one day, pull this from ajaj!
 	var pages = [{
@@ -61,6 +62,8 @@
 	  content: "Is The Place To Be(tm)"
 	}];
 	
+	var names = ["Aaron", "Arjun", "Austen", "Benjamin", "Bradley", "Brian", "Brian", "Brian", "Carson", "Chris", "Christopher", "Colin", "David", "Devin", "Edwin", "Eric", "Eric", "Josh", "Joshua", "Julie", "Justin", "Kevin", "Kevin", "Ksenia", "Laurie", "Matthew", "Matthew", "Mehdi", "Meredith", "Michael", "Michael", "Mingshuo", "Nathan", "Nhat", "Pardha", "Pat", "Pawan", "Peter", "Rafael", "Ryan", "Sam", "Sameeran", "Scott", "Sean", "Spencer", "Stan", "Stephen", "Steve", "Ted", "Tim", "Timothy", "Vincent", "Wen", "Yian", "Jeff"];
+	
 	var Widgets = React.createClass({
 	  displayName: 'Widgets',
 	
@@ -69,8 +72,9 @@
 	      'div',
 	      {
 	        className: "widgets" },
+	      React.createElement(Tabs, { pages: pages }),
 	      React.createElement(Clock, null),
-	      React.createElement(Tabs, { pages: pages })
+	      React.createElement(Autocomplete, { names: names })
 	    );
 	  }
 	});
@@ -19856,6 +19860,65 @@
 	});
 	
 	module.exports = Clock;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Names = React.createClass({
+	  displayName: "Names",
+	
+	  render: function () {
+	    var input = this.props.input;
+	    var names = this.props.names;
+	
+	    var matchedNames = [];
+	    names.forEach(function (name, index) {
+	      var matcher = new RegExp("^" + input, "i");
+	      if (name.match(matcher) && input.length >= 1) {
+	        matchedNames.push(React.createElement(
+	          "li",
+	          null,
+	          React.createElement(
+	            "strong",
+	            null,
+	            input[0].toUpperCase() + input.slice(1).toLowerCase()
+	          ),
+	          name.replace(matcher, "")
+	        ));
+	      }
+	    });
+	    return React.createElement(
+	      "ul",
+	      null,
+	      matchedNames
+	    );
+	  }
+	});
+	
+	var Autocomplete = React.createClass({
+	  displayName: "Autocomplete",
+	
+	  getInitialState: function () {
+	    return { input: "" };
+	  },
+	  handleChange: function (event) {
+	    this.setState({ input: event.target.value });
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      "div",
+	      { className: "widget" },
+	      React.createElement("input", { type: "text", value: this.state.input, onChange: this.handleChange }),
+	      React.createElement(Names, { names: this.props.names, input: this.state.input })
+	    );
+	  }
+	});
+	
+	module.exports = Autocomplete;
 
 /***/ }
 /******/ ]);
