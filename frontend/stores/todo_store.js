@@ -23,7 +23,6 @@ var TodoStore = {
     return Object.assign({}, _todos);
   },
 
-  //  what exectly should fetch do
   fetch: function() {
     var that = this;
     $.ajax(
@@ -64,17 +63,32 @@ var TodoStore = {
         {
           url: "/api/todos/" + id,
           type: "DELETE",
-          data: { todo: {id: id} },
           success: function(response) {
             delete _todos[id];
+            that.changed();
+          }
+        }
+      );
+    }
+  },
+
+  toggleDone: function(id) {
+    var that = this;
+    var todo = _todos[id];
+    if(todo) {
+      todo.done = !todo.done;
+      $.ajax(
+        {
+          url: "/api/todos/" + id,
+          type: "PATCH",
+          data: { todo: {done: todo.done}},
+          success: function(response){
+            that.changed();
           }
         }
       );
     }
   }
-
-
-
 };
 
 
