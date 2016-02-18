@@ -1,0 +1,37 @@
+li {
+  float: left;
+}
+
+.pos {
+  outline: 1px solid gray;
+  width: 50px;
+  height: 50px;
+  float: left;
+  transition: outline 0.5s, background-color 0.5s;
+  cursor: crosshair;
+  background-color: white;
+  list-style: none;
+}
+
+.group:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+ul.group {
+  margin: 0;
+  width: 500px;
+  padding: 0;
+  font-size: 45px;
+  text-align: center;
+  vertical-align: middle;
+  color: #1729FF;
+  font-weight: bold;
+  font-family: fantasy;
+  line-height: 56px;
+}
+
+.pos:hover{
+  background-color: #ccc;
+}
