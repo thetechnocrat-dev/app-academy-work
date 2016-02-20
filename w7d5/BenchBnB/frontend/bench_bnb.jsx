@@ -6,19 +6,19 @@ var BenchStore = require('./stores/bench');
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 
+// Components
+var Index = require('./components/index');
+var Map = require('./components/map');
+var Search  = require('./components/Search');
+
 // var routes = (
-//   <Route component={App} path ='/'>
-//     <Route component={PokemonDetail} path ='pokemon/:pokemonId'>
-//       <Route component={ToyDetail} path='toys/:toyId'>
-//
-//       </Route>
-//     </Route>
+//   <Route component={ } path ='/'>
+
 //   </Route>
 // );
 
 
 document.addEventListener('DOMContentLoaded', function () {
-
   var root = document.querySelector('#root');
-  ReactDOM.render(<div>test</div>, root);
+  ReactDOM.render(<Search />, root);
 });

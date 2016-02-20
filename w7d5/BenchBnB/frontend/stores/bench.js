@@ -16,7 +16,7 @@ var resetBenches = function(benches){
 BenchStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case BenchConstants.BENCHES_RECEIVED:
-      resetBenches(payload.benches);
+      var results = resetBenches(payload.benches);
       BenchStore.__emitChange();
       break;
   }
